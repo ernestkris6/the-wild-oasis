@@ -8,6 +8,6 @@ const StyledHeader = styled.header`
 
 export default function Header() {
   return (
-    <StyledHeader>Head</StyledHeader>
+    <StyledHeader>Heading</StyledHeader>
   )
 }
