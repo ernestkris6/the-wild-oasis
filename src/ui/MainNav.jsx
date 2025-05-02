@@ -27,7 +27,7 @@ const StyledNavLink = styled(NavLink)`
         transition: all 0.3s;
     }
 
-    /*This works because reacr router places the active class on the active NAVLINK*/
+    /*This works because react router places the active class on the active NAVLINK*/
     
     &:hover,
     &:active,
@@ -39,11 +39,11 @@ const StyledNavLink = styled(NavLink)`
     }
 
     & svg {
-        width: 2.4rem;
+        width: 3.4rem;
         height: 2.4rem;
         color: var(--color-grey-400);
         transition: all 0.3s;
-    }
+    } 
 
     &:hover svg,
     &:active svg,
