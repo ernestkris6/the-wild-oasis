@@ -29,3 +29,14 @@ const Box = styled.div`
     color: var(--color-grey-500);
   }
 `;
+
+
+
+
+export default function ErrorFallback() {
+  return (
+    <StyledErrorFallback>
+      <Box>Unable to load data...check your internet connection</Box>
+    </StyledErrorFallback>
+  )
+}

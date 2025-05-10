@@ -80,7 +80,8 @@ function CreateCabinForm() {
         <Button variation="secondary" type="reset">
           Cancel
         </Button>
-        <Button>Edit cabin</Button>
+        
+        <Button>Create cabin</Button>
       </FormRow>
     </Form>
   );
