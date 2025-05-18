@@ -41,7 +41,7 @@ export default function CabinTable() {
 
   const {
     isLoading, 
-    data:cabins, 
+    data: cabins, 
     error,
   } = useQuery({
     queryKey: ['cabins'],
