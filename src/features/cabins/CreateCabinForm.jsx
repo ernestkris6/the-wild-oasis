@@ -23,7 +23,7 @@ function CreateCabinForm({ cabinToEdit = {} }) {
   const { editCabin, isEditing} = useEditCabin();
 
   const isWorking = isCreating || isEditing;
-  
+
   const {id: editId, ...editValues} = cabinToEdit;
 
   const isEditSession = Boolean(editId);
@@ -107,18 +107,19 @@ function CreateCabinForm({ cabinToEdit = {} }) {
           label='Cabin name' 
           error={errors?.name?.message}> 
             <Input
-            type="text"
-            id="name" 
-            disabled={isWorking}
-            {...register("name", 
-            {required: "This field is required"})} 
+              type="text"
+              id="name" 
+              disabled={isWorking}
+              {...register("name", 
+              {required: "This field is required"})} 
           />
         </FormRow>
 
         <FormRow 
           label='Maximum capacity' 
           error={errors?.maxCapacity?.message}>
-            <Input type="number" 
+            <Input 
+               type="number" 
                id="maxCapacity" 
                disabled={isWorking}
                {...register("maxCapacity", 
