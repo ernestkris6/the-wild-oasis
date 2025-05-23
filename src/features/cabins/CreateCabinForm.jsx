@@ -22,7 +22,7 @@ function CreateCabinForm({ cabinToEdit = {} }) {
   const isEditSession = Boolean(editId);
 
   const {register, handleSubmit, reset, getValues, formState} = useForm({
-    defaultValues: isEditSession ? editValues : {}
+    defaultValues: isEditSession ? editValues : {},
   })
 
   const {errors} = formState;
@@ -65,12 +65,10 @@ function CreateCabinForm({ cabinToEdit = {} }) {
   const isWorking = isCreating || isEditing;
 
   function onSubmit(data){
-
     // console.log(data);
-    
     const image = typeof data.image === 'string' ? data.image : data.image[0]
 
-      if(isEditSession) editCabin({newCabinData: {...data, image}, id: editId})
+      if (isEditSession) editCabin({newCabinData: {...data, image}, id: editId});
       else createCabin({...data, image: image});
       // mutate({...data, image: data.iamge[0]})
   }
