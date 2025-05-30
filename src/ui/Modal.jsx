@@ -1,3 +1,5 @@
+import { createPortal } from "react-dom";
+import { HiXMark } from "react-icons/hi2";
 import styled from "styled-components";
 
 const StyledModal = styled.div`
@@ -48,3 +50,21 @@ const Button = styled.button`
     color: var(--color-grey-500);
   }
 `;
+
+//A react portal is a feature that helps us render a 
+// element outside its parent's DOM structure while
+//keeping the element on its original position on the component tree 
+// (Has to do with styling in case the component is reused elsewhere). It helps keep tooltips, menus, modal on top of all other element.
+
+export default function Modal({children, onClose}) {
+  return createPortal (
+    <Overlay> 
+      <StyledModal>
+        <Button onClick={onClose}><HiXMark /></Button>
+        <div>
+          {children}
+        </div>
+      </StyledModal>
+    </Overlay>, document.body // dom note
+  )
+}

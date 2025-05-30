@@ -17,7 +17,7 @@ import { useEditCabin } from "./useEditCabins";
 
 //empty object because values may not exist at times
 
-function CreateCabinForm({ cabinToEdit = {} }) {
+function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
 
   const { createCabin, isCreating,} = useCreateCabin();
   const { editCabin, isEditing} = useEditCabin();
@@ -81,6 +81,7 @@ function CreateCabinForm({ cabinToEdit = {} }) {
         onSuccess: (data) => {
           console.log(data);
           reset();
+          onclose?.();
         },
       }
       );
@@ -90,6 +91,7 @@ function CreateCabinForm({ cabinToEdit = {} }) {
         onSuccess: (data) => {
           console.log(data);
           reset();
+          onCloseModal?.();
         },
       });
       // mutate({...data, image: data.iamge[0]})
@@ -101,7 +103,7 @@ function CreateCabinForm({ cabinToEdit = {} }) {
 
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit, onError)}>
+    <Form onSubmit={handleSubmit(onSubmit, onError)} type={onCloseModal ? "modal" : "regular"}>
 
         <FormRow 
           label='Cabin name' 
@@ -183,7 +185,9 @@ function CreateCabinForm({ cabinToEdit = {} }) {
         {/* type is an HTML attribute! */}
         <Button 
           variation="secondary" 
-          type="reset">
+          type="reset"
+          //in case the form is reused we use optional chaining in case onCloseModal is undefined i.e does not exist the function would not be called
+          onClick={()=> onCloseModal?.()}>
             Cancel
         </Button>
         
