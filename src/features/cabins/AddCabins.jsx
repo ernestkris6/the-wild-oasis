@@ -1,19 +1,76 @@
-import { useState } from "react"
+// import { useState } from "react"
 import Button from "../../ui/Button"
 import Modal from "../../ui/Modal"
 import CreateCabinForm from "./CreateCabinForm"
+import CabinTable from './CabinTable'
+
 
 export default function AddCabins() {
+    return (
+      <Modal>
+        <Modal.Open opens='cabin-form'>
+          <Button>Add new cabin</Button>
+        </Modal.Open>
+        <Modal.Window name='cabin-form'>
+          <CreateCabinForm />
+        </Modal.Window>
 
-      const [isOpenModal, setisOpenModal] = useState(false)
+        <Modal.Open opens='table'>
+          <Button>Show table</Button>
+        </Modal.Open>
+        <Modal.Window name='table'>
+          <CabinTable />
+        </Modal.Window>
 
-  return (
-    <div>
-         <Button onClick={()=> setisOpenModal((show) => !show)}>Add new cabin</Button>
-              {isOpenModal && 
-                <Modal onClose={()=> setisOpenModal(false)}>
-                    <CreateCabinForm onCloseModal={()=> setisOpenModal(false)}/>
-                </Modal>}
-    </div>
+        
+      </Modal>
   )
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// export default function AddCabins() {
+
+//       const [isOpenModal, setisOpenModal] = useState(false)
+
+//   return (
+//     <div>
+//          <Button onClick={()=> setisOpenModal((show) => !show)}>Add new cabin</Button>
+//               {isOpenModal && 
+//                 <Modal onClose={()=> setisOpenModal(false)}>
+//                     <CreateCabinForm onCloseModal={()=> setisOpenModal(false)}/>
+//                 </Modal>}
+//     </div>
+//   )
+// }
