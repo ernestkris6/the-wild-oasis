@@ -74,28 +74,53 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
 
   function onSubmit(data){
     // console.log(data);
-    const image = typeof data.image === 'string' ? data.image : data.image[0]
+    // const image = typeof data.image === 'string' ? data.image : data.image[0]
 
-      if (isEditSession) editCabin({newCabinData: {...data, image}, id: editId},
+  //     if (isEditSession) editCabin({newCabinData: {...data, image}, id: editId},
+  //       {
+  //       onSuccess: (data) => {
+  //         console.log(data);
+  //         reset();
+  //         onclose?.();
+  //       },
+  //     }
+  //     );
+  //     else 
+  //       createCabin({...data, image: image}, 
+  //       {
+  //       onSuccess: (data) => {
+  //         console.log(data);
+  //         reset();
+  //         onCloseModal?.();
+  //       },
+  //     });
+  //     // mutate({...data, image: data.iamge[0]})
+  // }
+
+  const image = typeof data.image === "string" ? data.image : data.image[0];
+
+    if (isEditSession)
+      editCabin(
+        { newCabinData: { ...data, image }, id: editId },
         {
-        onSuccess: (data) => {
-          console.log(data);
-          reset();
-          onclose?.();
-        },
-      }
+          onSuccess: (data) => {
+            reset();
+            onCloseModal?.();
+          },
+        }
       );
-      else 
-        createCabin({...data, image: image}, 
+    else
+      createCabin(
+        { ...data, image: image },
         {
-        onSuccess: (data) => {
-          console.log(data);
-          reset();
-          onCloseModal?.();
-        },
-      });
-      // mutate({...data, image: data.iamge[0]})
+          onSuccess: (data) => {
+            reset();
+            onCloseModal?.();
+          },
+        }
+      );
   }
+
 
   function onError(errors){
     console.log(errors);
