@@ -66,7 +66,7 @@ export default function Modal({children}) {
   const [openName, setOpenName] = useState("")
 
   const close = () => setOpenName("");
-  const open = setOpenName;
+  const open = setOpenName; //a setter that would be called inside the tasks function
 
   return (
       <ModalContext.Provider value={{openName, close, open}}>
