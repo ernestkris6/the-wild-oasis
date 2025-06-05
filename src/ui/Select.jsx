@@ -23,7 +23,8 @@ export default function Select({options, value, onChange, ...props}) {
         {options.map((option) => (
             <option 
                 value={option.value}   
-                key={option.value}>
+                key={option.value}
+                >
                     {option.label}
             </option>
         ))}
