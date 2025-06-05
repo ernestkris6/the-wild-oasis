@@ -7,6 +7,7 @@ import Menus from "../../ui/Menus";
 import { useSearchParams } from 'react-router-dom';
 
 
+
 //queryfn fetches data from the api... you can use fetch inside it 
 export default function CabinTable() {
 
@@ -14,6 +15,12 @@ export default function CabinTable() {
   const {isLoading, cabins, error} = useCabins();
   const [searchParams] = useSearchParams()
 
+  if(isLoading) return <Spinner />
+
+  if(error) return <Error />
+
+
+  // 1) FILTER
   const filterValue = searchParams.get('discount') || 'all'
   console.log(filterValue);
 
@@ -24,13 +31,28 @@ export default function CabinTable() {
   if(filterValue === 'no-discount') filteredCabins = cabins.filter((cabin) => cabin.discount === 0);
 
   if(filterValue === 'with-discount') filteredCabins = cabins.filter((cabin)=> cabin.discount > 0);
+
+
+  // 2) SORT
+  // const sortBy = searchParams.get('sortBy') || "startDate-asc";
+  // const [field, direction] = sortBy.split("-");
+
+  // const modifier = direction === 'asc' ? 1 : -1;
+
+  // const sortedCabins = filteredCabins.sort((a, b ) => (a[field] - b[field]) * modifier);
+  // console.log(sortedCabins);
+  
+    const sortBy = searchParams.get("sortBy") || "startDate-asc";
+  const [field, direction] = sortBy.split("-");
+  const modifier = direction === "asc" ? 1 : -1;
+  const sortedCabins = filteredCabins.sort(
+    (a, b) => (a[field] - b[field]) * modifier
+  );
+
   
 
 
-  if(isLoading) return <Spinner />
-
-  if(error) return <Error />
-
+  
 
 
   return (
@@ -54,7 +76,8 @@ export default function CabinTable() {
 
       <Table.Body 
         // data={cabins} 
-        data={filteredCabins}
+        // data={filteredCabins}
+        data={sortedCabins}
         render={(cabin)=> (
         <CabinRow cabin={cabin} key={cabin.id}
         />)} 
