@@ -202,7 +202,7 @@ export const guests = [
     },
     {
       fullName: 'Ernest Chris',
-      email: 'ibrahim@yahoo.com',
+      email: 'ernestchris6@gmail.com',
       nationality: 'Nigeria',
       nationalID: '2345678009',
       countryFlag: 'https://flagcdn.com/ng.svg',
