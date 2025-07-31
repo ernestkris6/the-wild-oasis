@@ -11,7 +11,7 @@ import Pagination from "../../ui/Pagination";
 function BookingTable() {
   // const bookings = [];
 
-  const {isLoading, bookings, error} = useBookingsfetch();
+  const {isLoading, bookings, error, count} = useBookingsfetch();
     
   if (isLoading) return  <Spinner />
   
@@ -40,7 +40,7 @@ function BookingTable() {
         />
 
         <Table.Footer>
-          <Pagination count={45} />
+          <Pagination count={count} />
         </Table.Footer>
       </Table>
     </Menus>
