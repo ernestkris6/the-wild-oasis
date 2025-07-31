@@ -3,20 +3,22 @@ import Table from "../../ui/Table";
 import Menus from "../../ui/Menus";
 import Empty from "../../ui/Empty";
 import Spinner from '../../ui/Spinner';
-// import Error from '../../ui/ErrorFallback';
+import Error from '../../ui/ErrorFallback';
 
 import { useBookingsfetch } from "./useBookingsFetch";
+import Pagination from "../../ui/Pagination";
 
 function BookingTable() {
   // const bookings = [];
 
-  const {isLoading, bookings} = useBookingsfetch();
-
+  const {isLoading, bookings, error} = useBookingsfetch();
+    
   if (isLoading) return  <Spinner />
-
+  
   if(!bookings.length) return <Empty resourceName="bookings" />
+  
 
-  // if(error) return <Error />
+  if(error) return <Error />
 
   return (
     <Menus>
@@ -36,6 +38,10 @@ function BookingTable() {
             <BookingRow key={booking.id} booking={booking} />
           )}
         />
+
+        <Table.Footer>
+          <Pagination count={45} />
+        </Table.Footer>
       </Table>
     </Menus>
   );
