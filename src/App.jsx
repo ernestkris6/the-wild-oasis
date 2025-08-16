@@ -14,6 +14,8 @@ import Login from './pages/Login';
 import PageNotFound from './pages/PageNotFound';
 import AppLayout from './ui/AppLayout';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import Booking from './pages/Booking';
+import Checkin from './pages/Checkin';
 
 
 //stale time is the amount of time the data will stay fresh in the cache until it is fetched again.
@@ -42,6 +44,8 @@ export default function App() {
             <Route index element={<Navigate replace to='dashboard' />} />
               <Route path='dashboard' element={<Dashboard />} />
               <Route path='bookings' element={<Bookings />} />
+              <Route path='bookings/:bookingId' element={<Booking />} />
+              <Route path='checkin/:bookingId' element={<Checkin />} />
               <Route path='cabins' element={<Cabins />} />
               <Route path='users' element={<Users />} />
               <Route path='settings' element={<Settings />} />

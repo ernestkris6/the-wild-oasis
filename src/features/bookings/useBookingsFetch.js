@@ -1,10 +1,14 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { getBookings } from "../../services/apiBooking";
 
 import { useSearchParams } from "react-router-dom";
+import { PAGE_SIZE } from "../../utils/constants";
 
 
 export function useBookingsfetch() {
+
+  //TO QUERY
+  const queryClient = useQueryClient();
   const [searchParams] = useSearchParams();
 
   // FILTER
@@ -27,6 +31,7 @@ export function useBookingsfetch() {
   const page = !searchParams.get("page") ? 1 : Number(searchParams.get("page"));
 
 
+  //QUERY
   const {
     isLoading,
     data: {data:bookings, count} = {},  
@@ -37,10 +42,31 @@ export function useBookingsfetch() {
   });
 
 
- 
+  //PRE-FETCHING
+  
+  //To prevent additional page fetch
+  const pageCount = Math.ceil(count / PAGE_SIZE)
+
+  if(page < pageCount)
+
+  queryClient.prefetchQuery({
+  queryKey: ["bookings", filter, sortBy, page + 1],
+  queryFn: () => getBookings({ filter, sortBy, page: page + 1 }),
+})
+
+if(page > pageCount)
+
+  queryClient.prefetchQuery({
+  queryKey: ["bookings", filter, sortBy, page - 1],
+  queryFn: () => getBookings({ filter, sortBy, page: page - 1 }),
+})
+
+
   return { isLoading, error, bookings, count };
 }
 
+
+//READ UP INFINTEQUERIES FOR INFINITE SCROLL ON REACT QUERY
 
 
 
