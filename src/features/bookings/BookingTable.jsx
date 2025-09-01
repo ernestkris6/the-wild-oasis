@@ -15,10 +15,10 @@ function BookingTable() {
     
   if (isLoading) return  <Spinner />
   
+  if(error) return <Error />
+
   if(!bookings.length) return <Empty resourceName="bookings" />
   
-
-  if(error) return <Error />
 
   return (
     <Menus>

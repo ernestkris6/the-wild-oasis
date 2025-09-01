@@ -57,7 +57,7 @@ export default function CabinRow({cabin}) {
 
   // const [showForm, setShowForm] = useState(false)
   const {isDeleting, deleteCabin} = useDeletecabin();
-  const {createCabin, isCreating} = useCreateCabin();
+  const {isCreating, createCabin} = useCreateCabin();
 
   const {
     id: cabinId,
@@ -102,11 +102,11 @@ export default function CabinRow({cabin}) {
 
             <Menus.Button onClick={handleDuplicateCabin} icon={<HiSquare2Stack />}>Duplicate</Menus.Button>
             <Modal.Open opens='edit'>
-              <Menus.Button icon={<HiPencil />}>Edit</Menus.Button>
+              <Menus.Button icon={<HiPencil />} disabled={isCreating}>Edit</Menus.Button>
             </Modal.Open>
 
            <Modal.Open opens='delete'>
-              <Menus.Button icon={<HiTrash />}>Delete</Menus.Button>
+              <Menus.Button icon={<HiTrash />} disabled={isDeleting}>Delete</Menus.Button>
            </Modal.Open>  
 
           </Menus.List>
