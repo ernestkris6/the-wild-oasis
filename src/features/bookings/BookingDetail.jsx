@@ -70,7 +70,7 @@ function BookingDetail() {
               >
                 Check out
           </Button>)}
-
+ 
         <Modal>
           <Modal.Open opens='delete'>
             <Button variations='danger'>Delete Booking</Button>

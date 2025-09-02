@@ -1,5 +1,5 @@
 import styled, { keyframes } from "styled-components";
-import { BitLoaderAlt } from 'react-icons/bi';
+// import { BitLoaderAlt } from 'react-icons/bi';
 
 const rotate = keyframes`
     to {
@@ -7,7 +7,7 @@ const rotate = keyframes`
     }
 `;
 
-const SpinnerMini = styled(BitLoaderAlt)`
+const SpinnerMini = styled()`
     width: 2.4rem;
     height: 2.4rem;
     animation: ${rotate} 1.5s infinite linear;
