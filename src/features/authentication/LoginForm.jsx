@@ -53,6 +53,7 @@ function LoginForm() {
       </FormRowVertical>
       <FormRowVertical>
         <Button size="large">Login</Button>
+        {/* <Button size="large">{!isLoading ? 'Login' : <SpinnerMini />}</Button> */}
       </FormRowVertical>
     </Form>
   );
