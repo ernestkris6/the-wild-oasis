@@ -1,4 +1,4 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { login as loginApi } from "../../services/apiAuth";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
@@ -6,7 +6,7 @@ import { toast } from "react-hot-toast";
 export function useLogin() {
 
     //adding a logged in user to the react query cache
-    // const queryClient = useQueryClient();
+    const queryClient = useQueryClient();
     const navigate = useNavigate();
 
     const { mutate: login, isLoading } = useMutation({
@@ -14,8 +14,8 @@ export function useLogin() {
         onSuccess: (user) => {
             console.log(user);
             //adding a logged in user to the react query cache to avoid fetching again// didnt work tho
-            // queryClient.setQueryData(['user'], user)
-            navigate('/dashboard')
+            queryClient.setQueryData(['user'], user.user)
+            navigate('/dashboard', { replace: true })
         },
         onError: (err) => {
             console.log('ERROR', err);

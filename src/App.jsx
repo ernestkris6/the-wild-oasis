@@ -21,6 +21,8 @@ import ProtectedRoutes from './ui/ProtectedRoutes';
 
 //stale time is the amount of time the data will stay fresh in the cache until it is fetched again.
 
+//NOTE: You use useQuery to fetch data from the server and useMutation to modify it
+
 
 const queryClient = new QueryClient({
     defaultOptions:{
