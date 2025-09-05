@@ -20,6 +20,8 @@ function SignupForm() {
     
   // }
 
+  // reset() //clears err msgs
+
   function onSubmit({fullName, email, password}) {
       signUp({fullName, email,password}, 
         {
@@ -79,7 +81,7 @@ function SignupForm() {
 
       <FormRow>
         {/* type is an HTML attribute! */}
-        <Button variation="secondary" type="reset">
+        <Button variation="secondary" type="reset" onClick={reset}>
           Cancel
         </Button>
         <Button disabled={isLoading}>{!isLoading ? 'Create new user' : 'Creating new user'}</Button>
