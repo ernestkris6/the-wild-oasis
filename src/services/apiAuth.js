@@ -65,35 +65,70 @@ export async function logout() {
 }
 
 
-export async function updateCurrentUser({password, fullName, avatar}) {
+export async function updateCurrentUser({ password, fullName, avatar }) {
+  // 1. Update password OR fullName
+  let updateData;
+  if (password) updateData = { password };
+  if (fullName) updateData = { data: { fullName } };
 
-    //1. Update password or fullName
+  const { data, error } = await supabase.auth.updateUser(updateData);
 
-    let updateData;
-    if (password) updateData = { password }
-    if (fullName) updateData = {data: {fullName}} //it has this shape because initially fullname was passed into data
+  if (error) throw new Error(error.message);
+  if (!avatar) return data;
 
-    const {data, error} = supabase.auth.updateUser(updateData)
-    
-    if (error) throw new Error(error.message)
-    if (!avatar) return data;
+  // 2. Upload the avatar image
+  const fileName = `avatar-${data.user.id}-${Math.random()}`;
 
-    // 2. Uplpoad the avatar image
-    const fileName = `avatar-${data.user.id}-${Math.random()}`;
+  const { error: storageError } = await supabase.storage
+    .from("avatar")
+    .upload(fileName, avatar);
 
-    const { error: storageError } = await supabase.storage.from("avatars").upload(fileName, avatar);
+  if (storageError) throw new Error(storageError.message);
 
-    if (storageError) throw new Error(storageError.message);
+  // 3. Update avatar in the user
+  const { data: updatedUser, error: error2 } = await supabase.auth.updateUser({
+    data: {
+      avatar: `${supabaseUrl}/storage/v1/object/public/avatar/${fileName}`,
+    },
+  });
 
-
-    // 3. Update avatar in the user
-
-    const {data: updatedUser, error: error2} = await supabase.auth.updateUser({data: {
-        avatar: `${supabaseUrl}/storage/v1/object/public/avatar/${fileName}`
-    }})
-
-    if (error2) throw new Error(error2.message)
-        return updatedUser;
+  if (error2) throw new Error(error2.message);
+  return updatedUser;
 }
+
+
+//https://cewpohjcjinpewggeqxh.supabase.co/storage/v1/object/public/avatar/avatar-d9d78c3c-7f43-47a5-9343-46be4215871d-0.8647332940415614
+
+
+// export async function updateCurrentUser({password, fullName, avatar}) {
+
+//     //1. Update password or fullName
+
+//     let updateData;
+//     if (password) updateData = { password }
+//     if (fullName) updateData = {data: {fullName}} //it has this shape because initially fullname was passed into data
+
+//     const {data, error} = supabase.auth.updateUser(updateData)
+    
+//     if (error) throw new Error(error.message)
+//     if (!avatar) return data;
+
+//     // 2. Uplpoad the avatar image
+//     const fileName = `avatar-${data.user.id}-${Math.random()}`;
+
+//     const { error: storageError } = await supabase.storage.from("avatars").upload(fileName, avatar);
+
+//     if (storageError) throw new Error(storageError.message);
+
+
+//     // 3. Update avatar in the user
+
+//     const {data: updatedUser, error: error2} = await supabase.auth.updateUser({data: {
+//         avatar: `${supabaseUrl}/storage/v1/object/public/avatar/${fileName}`
+//     }})
+
+//     if (error2) throw new Error(error2.message)
+//         return updatedUser;
+// }
 
 // https://cewpohjcjinpewggeqxh.supabase.co/storage/v1/object/public/avatar/cabin-002.jpg
