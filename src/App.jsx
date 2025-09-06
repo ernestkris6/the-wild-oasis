@@ -17,6 +17,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import Booking from './pages/Booking';
 import Checkin from './pages/Checkin';
 import ProtectedRoutes from './ui/ProtectedRoutes';
+import { DarkModeProvider } from './context/DarkModeContext';
 
 
 //stale time is the amount of time the data will stay fresh in the cache until it is fetched again.
@@ -36,6 +37,7 @@ const queryClient = new QueryClient({
 
 export default function App() {
   return (
+    <DarkModeProvider>
     <QueryClientProvider client={queryClient}>
       <ReactQueryDevtools />
 
@@ -81,5 +83,6 @@ export default function App() {
       }}
       />
     </QueryClientProvider>
+    </DarkModeProvider>
       )
 }
