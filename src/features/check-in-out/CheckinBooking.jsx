@@ -87,10 +87,11 @@ function CheckinBooking() {
 
      {!hasBreakfast && (
       <Box>
-        <Checkbox checked={addBreakfast} 
-        onChange={() => {
-          setAddBreakfast((add) => !add);
-          setConfirmPaid(false)
+        <Checkbox 
+            checked={addBreakfast} 
+            onChange={() => {
+              setAddBreakfast((add) => !add);
+              setConfirmPaid(false)
         }}
          id='breakfast'
         >
@@ -113,7 +114,7 @@ function CheckinBooking() {
 
       <ButtonGroup>
         <Button onClick={handleCheckin} disabled={!confirmPaid || isCheckingIn}>Check in booking #{bookingId}</Button>
-        <Button variation="secondary" onClick={moveBack}>
+        <Button variations="secondary" onClick={moveBack}>
           Back
         </Button>
       </ButtonGroup>

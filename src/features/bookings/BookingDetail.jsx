@@ -85,7 +85,7 @@ function BookingDetail() {
           </Modal.Window>
         </Modal>
 
-        <Button variation="secondary" onClick={moveBack}>
+        <Button variations="secondary" onClick={moveBack}>
           Back
         </Button>
       </ButtonGroup>
