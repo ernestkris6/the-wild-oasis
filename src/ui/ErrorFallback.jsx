@@ -1,4 +1,7 @@
 import styled from "styled-components";
+import Heading from "./Heading";
+import GlobalStyles from "../styles/GlobalStyle";
+import Button from "./Button";
 
 const StyledErrorFallback = styled.main`
   height: 100vh;
@@ -33,10 +36,18 @@ const Box = styled.div`
 
 
 
-export default function ErrorFallback() {
+export default function ErrorFallback({error, resetErrorBoundary}) {
   return (
+    <>
+    <GlobalStyles />
     <StyledErrorFallback>
-      <Box>Unable to load data...check your internet connection</Box>
+      <Box>
+        <Heading as='h1'>Something went wrong 😢</Heading>
+        <p>Unable to load data...check your internet connection</p>
+        <p>{error.message}</p>
+        <Button sizes="large" onClick={resetErrorBoundary}>Try again</Button>
+      </Box>
     </StyledErrorFallback>
+    </>
   )
 }
