@@ -10,7 +10,7 @@ export function useDeleteBooking(){
         // mutationFn: (id) => deleteBooking(id),
         mutationFn: deleteCabinApi,
         onSuccess: () => {
-          toast.success('Cabin deleted successfully')
+          toast.success('Booking deleted successfully')
     
           queryClient.invalidateQueries({
             queryKey: ['bookings']

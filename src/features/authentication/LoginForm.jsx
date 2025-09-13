@@ -4,6 +4,7 @@ import Form from "../../ui/Form";
 import Input from "../../ui/Input";
 import FormRowVertical from "../../ui/FormRowVertical";
 import { useLogin } from "./useLogin";
+import SpinnerMini from "../../ui/SpinnerMini";
 // import SpinnerMini from "../../ui/SpinnerMini";
 // import { login } from "../../services/apiAuth";
 // import { useNavigate } from "react-router-dom";
@@ -53,8 +54,8 @@ function LoginForm() {
         />
       </FormRowVertical>
       <FormRowVertical>
-        <Button sizes="large">Login</Button>
-        {/* <Button size="large">{!isLoading ? 'Login' : <SpinnerMini />}</Button> */}
+        {/* <Button sizes="large">Login</Button> */}
+        <Button size="large">{!isLoading ? 'Login' : <SpinnerMini />}</Button>
       </FormRowVertical>
     </Form>
   );

@@ -123,13 +123,28 @@ export async function getStaysTodayActivity() {
 // }
 
 
+// export async function updateBooking(id, obj) {
+
+//   let query = supabase.from("bookings");
+
+//   query = query.update(obj).eq("id", id)
+
+//   const { data, error } = await query.select().single();
+   
+//   if (error) {
+//     console.error(error);
+//     throw new Error("Booking could not be updated");
+//   }
+//   return data;
+// }
+
 export async function updateBooking(id, obj) {
   const { data, error } = await supabase
     .from("bookings")
     .update(obj)
     .eq("id", id)
     .select()
-    // .single(id); 
+    .single();
 
   if (error) {
     console.error(error);

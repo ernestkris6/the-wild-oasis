@@ -54,8 +54,10 @@ function CheckinBooking() {
   } = booking;
 
 
-  const optionalBreakfastPrice = settings.breakFastPrice * numNights * numGuests;
+  // const optionalBreakfastPrice = settings.breakFastPrice * numNights * numGuests;
   
+  const optionalBreakfastPrice =
+    settings.breakfastPrice * numNights * numGuests;
 
   function handleCheckin() {
     if(!confirmPaid) return;
@@ -79,13 +81,30 @@ function CheckinBooking() {
   return (
     <>
       <Row type="horizontal">
-        <Heading as="h1">Check in booking #{bookingId}</Heading>
+        <Heading as="h1">Check in booking #{bookingId}
+        </Heading>
         <ButtonText onClick={moveBack}>&larr; Back</ButtonText>
       </Row>
 
       <BookingDataBox booking={booking} />
 
-     {!hasBreakfast && (
+
+       {!hasBreakfast && (
+        <Box>
+          <Checkbox
+            checked={addBreakfast}
+            onChange={() => {
+              setAddBreakfast((add) => !add);
+              setConfirmPaid(false);
+            }}
+            id="breakfast"
+          >
+            Want to add breakfast for {formatCurrency(optionalBreakfastPrice)}?
+          </Checkbox>
+        </Box>
+      )}
+
+     {/* {!hasBreakfast && (
       <Box>
         <Checkbox 
             checked={addBreakfast} 
@@ -97,7 +116,7 @@ function CheckinBooking() {
         >
           Want to add breakfast for {formatCurrency(optionalBreakfastPrice)}?
         </Checkbox>
-      </Box>)}
+      </Box>)} */}
 
       <Box>
         <Checkbox checked={confirmPaid}
